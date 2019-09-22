@@ -7,7 +7,7 @@ public final class SantaSleigh implements SantasSleigh {
 
     static private final SantaSleigh theSleigh = new SantaSleigh();
 
-    private List<Present> cargo = new ArrayList<>();
+    private final List<Present> cargo = new ArrayList<>();
 
     private SantaSleigh() {
     }

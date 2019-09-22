@@ -3,12 +3,12 @@ package de.pruefbit.kata;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class Elf implements Runnable {
+class Elf implements Runnable {
 
     private final Consumer<Present> dropper;
     private final Supplier<Present> loader;
 
-    public Elf(Supplier<Present> loader, Consumer<Present> dropper) {
+    Elf(Supplier<Present> loader, Consumer<Present> dropper) {
         this.loader = loader;
         this.dropper = dropper;
     }

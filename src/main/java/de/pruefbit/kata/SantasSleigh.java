@@ -1,7 +1,7 @@
 package de.pruefbit.kata;
 
 @FunctionalInterface
-public interface SantasSleigh {
+interface SantasSleigh {
 
     void pack(Present present);
 }
