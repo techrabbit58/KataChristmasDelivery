@@ -9,6 +9,7 @@ class ElfTest {
 
     static private Elf elf;
     static private boolean isElfFreeForNextJob;
+    private static final long MULTIPLE_PACKETS = 100;
 
     static void callback() {
         isElfFreeForNextJob = true;
@@ -17,7 +18,7 @@ class ElfTest {
     @BeforeAll
     static void setup() {
         ToyMachine toyMachine = new ToyMachine();
-        SantasSleigh santasSleigh = new SantasSleigh();
+        SantasSleigh santasSleigh = new Sleigh();
         elf = new Elf(toyMachine::givePresent, santasSleigh::pack, ElfTest::callback);
     }
 
@@ -35,7 +36,6 @@ class ElfTest {
 
     @Test
     void elf_can_pick_and_deliver_multiple_packets_in_sequence() {
-        long MULTIPLE_PACKETS = 100;
         for (long n = 1; n <= MULTIPLE_PACKETS; n += 1) {
             isElfFreeForNextJob = false;
             elf.run();

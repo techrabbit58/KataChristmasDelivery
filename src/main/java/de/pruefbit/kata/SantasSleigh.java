@@ -2,9 +2,9 @@ package de.pruefbit.kata;
 
 import java.util.Objects;
 
-class SantasSleigh {
+interface SantasSleigh {
 
-    void pack(Present present) {
+    default void pack(Present present) {
         Objects.requireNonNull(present);
     }
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 class SantaSleighTest {
 
-    private static final SantasSleigh santasSleigh = new SantasSleigh();
+    private static final SantasSleigh santasSleigh = new Sleigh();
     private static final int MULTIPLE_PACKETS = 100;
 
     @Test
