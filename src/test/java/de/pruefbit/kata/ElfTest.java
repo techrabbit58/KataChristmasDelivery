@@ -11,7 +11,7 @@ class ElfTest {
     static private boolean isElfFreeForNextJob;
     private static final long MULTIPLE_PACKETS = 100;
 
-    static void callback() {
+    static void callback(Object o) {
         isElfFreeForNextJob = true;
     }
 
