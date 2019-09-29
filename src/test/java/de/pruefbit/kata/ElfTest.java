@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ElfTest {
 
+    private static final long MULTIPLE_PACKETS = 100;
     static private Elf elf;
     static private boolean isElfFreeForNextJob;
-    private static final long MULTIPLE_PACKETS = 100;
 
     static void callback(Object o) {
         isElfFreeForNextJob = true;
@@ -25,6 +25,11 @@ class ElfTest {
     @Test
     void could_instantiate_one_elf_with_dependencies() {
         assertNotEquals(null, elf);
+    }
+
+    @Test
+    void elf_when_instantiated_with_nulls_throws_exception() {
+        assertThrows(NullPointerException.class, () -> new Elf(null, null, null));
     }
 
     @Test
