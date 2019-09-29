@@ -22,19 +22,19 @@ class ElfTest {
     }
 
     @Test
-    void couldInstantiateOneElfWithDependencies() {
+    void could_instantiate_one_elf_with_dependencies() {
         assertNotEquals(null, elf);
     }
 
     @Test
-    void elfPicksAndDeliversOnePacketToSantaSleigh() {
+    void elf_picks_and_delivers_one_ppresent_to_santas_sleigh() {
         elfHasCalledBack = false;
         elf.run();
         assertTrue(elfHasCalledBack);
     }
 
     @Test
-    void elfCanPickAndDeliverMultiplePacketsInSequence() {
+    void elf_can_pick_and_deliver_multiple_packets_in_sequence() {
         long MULTIPLE_PACKETS = 100;
         for (long n = 1; n <= MULTIPLE_PACKETS; n += 1) {
             elfHasCalledBack = false;

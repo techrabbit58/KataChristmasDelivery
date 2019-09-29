@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PresentTest {
 
     @Test
-    void canInstantiateOneNewPresent() {
+    void can_instantiate_one_new_present() {
         assertNotEquals(null, new Present());
     }
 }
