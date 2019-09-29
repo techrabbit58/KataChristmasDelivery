@@ -27,7 +27,7 @@ class ElfTest {
     }
 
     @Test
-    void elf_picks_and_delivers_one_ppresent_to_santas_sleigh() {
+    void elf_picks_and_delivers_one_present_to_santas_sleigh() {
         elfHasCalledBack = false;
         elf.run();
         assertTrue(elfHasCalledBack);
