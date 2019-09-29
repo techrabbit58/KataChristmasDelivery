@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class ElfTest {
 
     static private Elf elf;
-    static private boolean elfHasCalledBack;
+    static private boolean isElfFreeForNextJob;
 
     static void callback() {
-        elfHasCalledBack = true;
+        isElfFreeForNextJob = true;
     }
 
     @BeforeAll
@@ -28,18 +28,18 @@ class ElfTest {
 
     @Test
     void elf_picks_and_delivers_one_present_to_santas_sleigh() {
-        elfHasCalledBack = false;
+        isElfFreeForNextJob = false;
         elf.run();
-        assertTrue(elfHasCalledBack);
+        assertTrue(isElfFreeForNextJob);
     }
 
     @Test
     void elf_can_pick_and_deliver_multiple_packets_in_sequence() {
         long MULTIPLE_PACKETS = 100;
         for (long n = 1; n <= MULTIPLE_PACKETS; n += 1) {
-            elfHasCalledBack = false;
+            isElfFreeForNextJob = false;
             elf.run();
-            assertTrue(elfHasCalledBack);
+            assertTrue(isElfFreeForNextJob);
         }
     }
 }

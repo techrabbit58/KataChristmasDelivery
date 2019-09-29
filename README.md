@@ -12,6 +12,13 @@ Elves.
 ## Specification
 In order to receive presents yourself this year,
 you’ll have to design a system to support his changing process.
+## Sleigh Interface
+Santa has provided this interface to represent his Sleigh.
+
+    public interface SantasSleigh {
+       void pack(Present present);
+    }
+
 ## User Story 1
 Start off by recreating the current system Santa has.
 
@@ -54,10 +61,3 @@ Santa has just received news that some families have been very naughty during th
 He wants to be able to cancel presents for these families by 
 telling Mrs Claus to discard their presents.
 
-## Sleigh Interface
-
-Santa has provided this interface to represent his Sleigh.
-
-    public interface SantasSleigh {
-       void pack(Present present);
-    }
