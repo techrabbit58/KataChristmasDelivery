@@ -1,7 +1,10 @@
 package de.pruefbit.kata;
 
-@FunctionalInterface
-interface SantasSleigh {
+import java.util.Objects;
 
-    void pack(Present present);
+class SantasSleigh {
+
+    void pack(Present present) {
+        Objects.requireNonNull(present);
+    }
 }

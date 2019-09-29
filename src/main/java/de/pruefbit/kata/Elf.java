@@ -1,16 +1,21 @@
 package de.pruefbit.kata;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class Elf implements Runnable {
 
+    static private final int MILLIS_TO_WALK = 10;
+
     private final Consumer<Present> dropper;
     private final Supplier<Present> loader;
+    private final Runnable callback;
 
-    Elf(Supplier<Present> loader, Consumer<Present> dropper) {
-        this.loader = loader;
-        this.dropper = dropper;
+    Elf(Supplier<Present> loader, Consumer<Present> dropper, Runnable callback) {
+        this.loader = Objects.requireNonNull(loader);
+        this.dropper = Objects.requireNonNull(dropper);
+        this.callback = Objects.requireNonNull(callback);
     }
 
     @Override
@@ -19,16 +24,12 @@ class Elf implements Runnable {
         walk();
         dropper.accept(present);
         walk();
-        callback();
-    }
-
-    private void callback() {
-        System.out.println("Elf: I'm available to transport another present.");
+        callback.run();
     }
 
     private void walk() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(MILLIS_TO_WALK);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

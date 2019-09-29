@@ -7,36 +7,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ElfTest {
 
-    static private ToyMachine toyMachine;
-    static private SantaSleigh santaSleigh;
     static private Elf elf;
+    static private boolean elfHasCalledBack;
+
+    static void callback() {
+        elfHasCalledBack = true;
+    }
 
     @BeforeAll
     static void setup() {
-        toyMachine = new ToyMachine();
-        santaSleigh = SantaSleigh.getSleigh();
-        elf = new Elf(toyMachine::givePresent, santaSleigh::pack);
+        ToyMachine toyMachine = new ToyMachine();
+        SantasSleigh santasSleigh = new SantasSleigh();
+        elf = new Elf(toyMachine::givePresent, santasSleigh::pack, ElfTest::callback);
     }
 
     @Test
-    void canInstantiateOneElfWithDependencies() {
-        assertNotEquals(null, new Elf(toyMachine::givePresent, santaSleigh::pack));
+    void couldInstantiateOneElfWithDependencies() {
+        assertNotEquals(null, elf);
     }
 
     @Test
     void elfPicksAndDeliversOnePacketToSantaSleigh() {
-        long packetsOnSleigh = santaSleigh.cargoSize();
+        elfHasCalledBack = false;
         elf.run();
-        assertEquals(packetsOnSleigh + 1, santaSleigh.cargoSize());
+        assertTrue(elfHasCalledBack);
     }
 
     @Test
     void elfCanPickAndDeliverMultiplePacketsInSequence() {
-        final long packetsToDeliver = 10;
-        long packetsOnSleigh = santaSleigh.cargoSize();
-        for (long n = 1; n <= packetsToDeliver; n += 1) {
+        long MULTIPLE_PACKETS = 100;
+        for (long n = 1; n <= MULTIPLE_PACKETS; n += 1) {
+            elfHasCalledBack = false;
             elf.run();
+            assertTrue(elfHasCalledBack);
         }
-        assertEquals(packetsOnSleigh + packetsToDeliver, santaSleigh.cargoSize());
     }
 }

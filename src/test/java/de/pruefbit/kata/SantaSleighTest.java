@@ -2,31 +2,21 @@ package de.pruefbit.kata;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SantaSleighTest {
 
-    private static final SantaSleigh santaSleigh = SantaSleigh.getSleigh();
-
-    @Test
-    void twoReferencesOfSantaSleighPointToIdenticalObject() {
-        assertSame(SantaSleigh.getSleigh(), SantaSleigh.getSleigh());
-    }
+    private static final SantasSleigh santasSleigh = new SantasSleigh();
+    private static final int MULTIPLE_PACKETS = 100;
 
     @Test
     void canPutOneNewPresentToSantaSleigh() {
         Present present = new Present();
-        long size = santaSleigh.cargoSize();
-        santaSleigh.pack(present);
-        assertEquals(size + 1, santaSleigh.cargoSize());
+        santasSleigh.pack(present);
     }
 
     @Test
-    void canPutTenNewPresentsToSantaSleigh() {
-        long size = santaSleigh.cargoSize();
-        for (int i = 0; i < 10; i += 1) {
-            santaSleigh.pack(new Present());
+    void canPutMultipleNewPresentsToSantaSleigh() {
+        for (int i = 0; i < MULTIPLE_PACKETS; i += 1) {
+            santasSleigh.pack(new Present());
         }
-        assertEquals(size + 10, santaSleigh.cargoSize());
     }
 }
