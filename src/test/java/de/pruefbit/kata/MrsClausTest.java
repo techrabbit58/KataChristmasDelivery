@@ -9,29 +9,38 @@ class MrsClausTest {
 
     private static final int TEAM_SIZE = 3;
     private static final int MULTIPLE_RUNS = 10;
-    static private MrsClaus mrsSanta;
+    static private MrsClaus mrsClaus;
 
     @BeforeAll
     static void setUp() {
-        mrsSanta = new MrsClaus(TEAM_SIZE);
+        mrsClaus = new MrsClaus(TEAM_SIZE);
     }
 
     @Test
-    void mrs_santa_could_be_instantiated_with_team_size() {
-        assertNotEquals(null, mrsSanta);
-        assertEquals(TEAM_SIZE, mrsSanta.getNumberOfTeamMembers());
+    void mrs_claus_could_be_instantiated_with_team_size() {
+        assertNotEquals(null, mrsClaus);
+    }
+
+    @Test
+    void throws_error_if_instantiated_with_zero() {
+        assertThrows(IllegalArgumentException.class, () -> new MrsClaus(0));
+    }
+
+    @Test
+    void throws_error_if_instantiated_with_negative() {
+        assertThrows(IllegalArgumentException.class, () -> new MrsClaus(-3));
     }
 
     @Test
     void can_run_one_time_with_multiple_elves() {
-        mrsSanta.run();
+        mrsClaus.run();
     }
 
     @Test
     void can_run_multiple_times_with_multiple_elves() {
         assertDoesNotThrow(() -> {
             for (int n = 0; n < MULTIPLE_RUNS; n += 1) {
-                mrsSanta.run();
+                mrsClaus.run();
             }
         });
     }

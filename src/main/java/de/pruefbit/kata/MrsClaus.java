@@ -10,7 +10,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 class MrsClaus implements Runnable {
 
     static private final SantasSleigh santasSleigh = new Sleigh();
-    private final int numberOfTeamMembers;
     private final Executor execute;
     private final List<ToyMachine> toyMachines = new ArrayList<>();
     private final BlockingDeque<Elf> availableElves = new LinkedBlockingDeque<>();
@@ -18,10 +17,9 @@ class MrsClaus implements Runnable {
 
     MrsClaus(int numberOfTeamMembers) {
         if (numberOfTeamMembers <= 0) {
-            throw new AssertionError("team must at least contain one member");
+            throw new IllegalArgumentException("number of team members must be positive");
         }
-        this.numberOfTeamMembers = numberOfTeamMembers;
-        for (int n = 0; n < getNumberOfTeamMembers(); n += 1) {
+        for (int n = 0; n < numberOfTeamMembers; n += 1) {
             toyMachines.add(new ToyMachine());
             availableElves.add(new Elf(this::givePresent, santasSleigh::pack, this::callback));
         }
@@ -41,24 +39,20 @@ class MrsClaus implements Runnable {
         }
     }
 
-    int getNumberOfTeamMembers() {
-        return numberOfTeamMembers;
-    }
-
     @Override
     public void run() {
-            for (ToyMachine tm : toyMachines) {
-                availablePresents.add(tm.givePresent());
+        for (ToyMachine tm : toyMachines) {
+            availablePresents.add(tm.givePresent());
+        }
+        int presentsToDeliver = availablePresents.size();
+        while (presentsToDeliver > 0) {
+            try {
+                execute.execute(availableElves.takeFirst());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                throw new RuntimeException("mrs claus got interrupted");
             }
-            int presentsToDeliver = availablePresents.size();
-            while (presentsToDeliver > 0) {
-                try {
-                    execute.execute(availableElves.takeFirst());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    throw new RuntimeException("mrs claus got interrupted");
-                }
-                presentsToDeliver -= 1;
-            }
+            presentsToDeliver -= 1;
+        }
     }
 }
