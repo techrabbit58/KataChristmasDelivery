@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MrsClausTest {
 
     private static final int TEAM_SIZE = 3;
-    private static final int MULTIPLE_RUNS = 10;
+    private static final int MULTIPLE_RUNS = 3;
     private static final int MAX_PRESENTS_PER_FAMILY = 10;
     private static final List<String> FAMILIES = Arrays.asList(
             "Kowalsky",
@@ -58,9 +58,17 @@ class MrsClausTest {
     void can_be_instantiated_by_builder() {
         mrsClaus = new MrsClaus.Builder()
                 .setNumberOfTeamMembers(TEAM_SIZE)
+                .build();
+        assertNotNull(mrsClaus);
+    }
+
+    @Test
+    void can_run_for_the_families() {
+        mrsClaus = new MrsClaus.Builder()
+                .setNumberOfTeamMembers(TEAM_SIZE)
                 .setMaxPresentsPerFamily(MAX_PRESENTS_PER_FAMILY)
                 .addFamilies(FAMILIES)
                 .build();
-        assertNotNull(mrsClaus);
+        mrsClaus.run();
     }
 }

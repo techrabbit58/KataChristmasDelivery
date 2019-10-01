@@ -76,22 +76,29 @@ class MrsClaus implements Runnable {
 
     @Override
     public void run() {
-        for (ToyMachine tm : toyMachines) {
-            Present p = tm.givePresent();
-            if (p == null) {
+        boolean terminate = false;
+        while (!terminate) {
+            for (ToyMachine tm : toyMachines) {
+                Present p = tm.givePresent();
+                terminate = (p == null);
+                if (terminate) {
+                    break;
+                }
+                availablePresents.add(p);
+            }
+            int presentsToDeliver = availablePresents.size();
+            while (presentsToDeliver > 0) {
+                try {
+                    execute.execute(availableElves.takeFirst());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException("mrs claus got interrupted");
+                }
+                presentsToDeliver -= 1;
+            }
+            if (families.isEmpty()) {
                 break;
             }
-            availablePresents.add(p);
-        }
-        int presentsToDeliver = availablePresents.size();
-        while (presentsToDeliver > 0) {
-            try {
-                execute.execute(availableElves.takeFirst());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                throw new RuntimeException("mrs claus got interrupted");
-            }
-            presentsToDeliver -= 1;
         }
     }
 
