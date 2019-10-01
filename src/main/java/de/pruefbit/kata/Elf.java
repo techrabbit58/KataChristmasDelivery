@@ -35,4 +35,9 @@ class Elf implements Runnable {
             Thread.currentThread().interrupt();
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "@" + this.hashCode();
+    }
 }

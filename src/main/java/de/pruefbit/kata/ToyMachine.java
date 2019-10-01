@@ -52,8 +52,15 @@ class ToyMachine {
         }
 
         Builder setMaxPresentsPerFamily(int n) {
-            toyMachine.maxPresentsPerFamily = n;
+            toyMachine.maxPresentsPerFamily = mayNotBeNegative(n);
             return this;
+        }
+
+        private static int mayNotBeNegative(int n) {
+            if (n < 0) {
+                throw new RuntimeException("number may not be negative");
+            }
+            return n;
         }
 
         ToyMachine build() {

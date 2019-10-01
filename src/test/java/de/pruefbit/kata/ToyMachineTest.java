@@ -75,6 +75,11 @@ class ToyMachineTest {
     }
 
     @Test
+    void negative_not_allowed_for_max_presents() {
+        assertThrows(RuntimeException.class, () -> new ToyMachine.Builder().setMaxPresentsPerFamily(-1));
+    }
+
+    @Test
     void provides_null_with_family_and_presents_limit_exceeded() {
         String family = "Miller";
         ToyMachine tm = new ToyMachine.Builder().addFamily(family).setMaxPresentsPerFamily(1).build();

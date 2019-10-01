@@ -18,4 +18,13 @@ class Present {
     String getFamily() {
         return family;
     }
+
+    @Override
+    public String toString() {
+        String info = this.getClass().getSimpleName() + "@" + this.hashCode();
+        if (getFamily() != null) {
+            return  info + " for " + getFamily();
+        }
+        return info;
+    }
 }
