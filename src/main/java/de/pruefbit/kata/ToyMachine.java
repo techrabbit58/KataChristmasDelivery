@@ -3,6 +3,8 @@ package de.pruefbit.kata;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.pruefbit.kata.Helpers.mayNotBeNegative;
+
 class ToyMachine {
     private int maxPresentsPerFamily;
     private final Map<String, Integer> families = new HashMap<>();
@@ -54,13 +56,6 @@ class ToyMachine {
         Builder setMaxPresentsPerFamily(int n) {
             toyMachine.maxPresentsPerFamily = mayNotBeNegative(n);
             return this;
-        }
-
-        private static int mayNotBeNegative(int n) {
-            if (n < 0) {
-                throw new RuntimeException("number may not be negative");
-            }
-            return n;
         }
 
         ToyMachine build() {
