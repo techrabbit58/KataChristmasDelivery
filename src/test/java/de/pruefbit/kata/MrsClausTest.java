@@ -1,6 +1,5 @@
 package de.pruefbit.kata;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,13 +10,9 @@ class MrsClausTest {
     private static final int MULTIPLE_RUNS = 10;
     static private MrsClaus mrsClaus;
 
-    @BeforeAll
-    static void setUp() {
-        mrsClaus = new MrsClaus(TEAM_SIZE);
-    }
-
     @Test
-    void mrs_claus_could_be_instantiated_with_team_size() {
+    void mrs_claus_can_be_instantiated_with_team_size() {
+        mrsClaus = new MrsClaus(TEAM_SIZE);
         assertNotEquals(null, mrsClaus);
     }
 
@@ -33,11 +28,13 @@ class MrsClausTest {
 
     @Test
     void can_run_one_time_with_multiple_elves() {
+        mrsClaus = new MrsClaus(TEAM_SIZE);
         mrsClaus.run();
     }
 
     @Test
     void can_run_multiple_times_with_multiple_elves() {
+        mrsClaus = new MrsClaus(TEAM_SIZE);
         assertDoesNotThrow(() -> {
             for (int n = 0; n < MULTIPLE_RUNS; n += 1) {
                 mrsClaus.run();
