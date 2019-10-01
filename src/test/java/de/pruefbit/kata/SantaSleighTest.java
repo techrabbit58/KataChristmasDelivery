@@ -9,14 +9,14 @@ class SantaSleighTest {
 
     @Test
     void can_put_one_new_present_to_santas_sleigh() {
-        Present present = new Present();
+        Present present = new Present("Default");
         santasSleigh.pack(present);
     }
 
     @Test
     void can_put_multiple_new_presents_to_santas_sleigh() {
         for (int i = 0; i < MULTIPLE_PACKETS; i += 1) {
-            santasSleigh.pack(new Present());
+            santasSleigh.pack(new Present("Default"));
         }
     }
 }

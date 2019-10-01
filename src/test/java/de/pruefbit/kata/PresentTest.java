@@ -8,6 +8,6 @@ class PresentTest {
 
     @Test
     void can_instantiate_one_new_present() {
-        assertNotEquals(null, new Present());
+        assertNotEquals(null, new Present("Default"));
     }
 }

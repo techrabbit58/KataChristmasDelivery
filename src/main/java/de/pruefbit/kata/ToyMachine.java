@@ -16,7 +16,7 @@ class ToyMachine {
     Present givePresent() {
         Present present;
         if (families.isEmpty()) {
-            present = new Present();
+            present = new Present("Default");
         } else {
             String family = pickOneFamily();
             if (family == null) {

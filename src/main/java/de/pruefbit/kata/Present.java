@@ -7,10 +7,6 @@ package de.pruefbit.kata;
 class Present {
     private final String family;
 
-    Present() {
-        family = null;
-    }
-
     Present(String family) {
         this.family = family;
     }
@@ -19,10 +15,6 @@ class Present {
 
     @Override
     public String toString() {
-        String info = this.getClass().getSimpleName() + "@" + this.hashCode();
-        if (getFamily() != null) {
-            return  info + " for " + getFamily();
-        }
-        return info;
+        return  this.getClass().getSimpleName() + "@" + this.hashCode() + " for " + getFamily();
     }
 }
