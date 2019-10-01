@@ -98,7 +98,7 @@ class MrsClaus implements Runnable {
         }
 
         Builder setMaxPresentsPerFamily(int maxPresents) {
-            maxPresentsPerFamily = Helpers.mayNotBeNegative(maxPresents);
+            maxPresentsPerFamily = Helpers.mustNotBeNegative(maxPresents);
             return this;
         }
 

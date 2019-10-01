@@ -3,7 +3,7 @@ package de.pruefbit.kata;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static de.pruefbit.kata.Helpers.mayNotBeNegative;
+import static de.pruefbit.kata.Helpers.mustNotBeNegative;
 
 class ToyMachine {
     private int maxPresentsPerFamily;
@@ -54,7 +54,7 @@ class ToyMachine {
         }
 
         Builder setMaxPresentsPerFamily(int n) {
-            toyMachine.maxPresentsPerFamily = mayNotBeNegative(n);
+            toyMachine.maxPresentsPerFamily = mustNotBeNegative(n);
             return this;
         }
 

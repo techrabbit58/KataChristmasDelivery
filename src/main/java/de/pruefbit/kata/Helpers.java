@@ -6,21 +6,21 @@ class Helpers {
 
     static int mustBePositive(int n) {
         if (n <= 0) {
-            throw new IllegalArgumentException("number of team members must be positive");
+            throw new IllegalArgumentException("number must be positive");
         }
         return n;
     }
 
-    static int mayNotBeNegative(int n) {
+    static int mustNotBeNegative(int n) {
         if (n < 0) {
-            throw new RuntimeException("number may not be negative");
+            throw new IllegalArgumentException("number may not be negative");
         }
         return n;
     }
 
     static List<String> mustNotBeEmpty(List<String> stringList) {
         if (stringList.isEmpty()) {
-            throw new RuntimeException("list of strings must not be empty");
+            throw new IllegalArgumentException("list of strings must not be empty");
         }
         return stringList;
     }
