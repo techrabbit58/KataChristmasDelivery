@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ElfTest {
 
-    private static final long MULTIPLE_PACKETS = 100;
+    private static final long MULTIPLE_PACKETS = 3;
     static private Elf elf;
     static private boolean isElfFreeForNextJob;
 

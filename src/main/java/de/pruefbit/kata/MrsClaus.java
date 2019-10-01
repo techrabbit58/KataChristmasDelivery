@@ -11,18 +11,20 @@ import java.util.function.Supplier;
 
 class MrsClaus implements Runnable {
     static private final SantasSleigh santasSleigh = new Sleigh();
-    static private final List<String> families = new ArrayList<>();
+    static private List<String> families;
     static private Supplier<ToyMachine> toyMachineSupplier = MrsClaus::defaultToyMachineSupplier;
-    static private int maxPresentsPerFamily = 0;
+    static private List<Integer> maxPerMachine;
+    static private int currentToyMachine;
 
     private final Executor execute;
     private final List<ToyMachine> toyMachines = new ArrayList<>();
     private final BlockingDeque<Elf> availableElves = new LinkedBlockingDeque<>();
     private final BlockingDeque<Present> availablePresents = new LinkedBlockingDeque<>();
 
-    MrsClaus(int numberOfTeamMembers) {
+    private MrsClaus(int numberOfTeamMembers) {
         Helpers.mustBePositive(numberOfTeamMembers);
         for (int n = 0; n < numberOfTeamMembers; n += 1) {
+            currentToyMachine = n;
             toyMachines.add(toyMachineSupplier.get());
             availableElves.add(new Elf(this::givePresent, santasSleigh::pack, this::callback));
         }
@@ -36,7 +38,7 @@ class MrsClaus implements Runnable {
     private static ToyMachine familyToyMachineSupplier() {
         ToyMachine.Builder builder = new ToyMachine.Builder();
         families.forEach(builder::addFamily);
-        builder.setMaxPresentsPerFamily(maxPresentsPerFamily);
+        builder.setMaxPresentsPerFamily(maxPerMachine.get(currentToyMachine));
         return builder.build();
     }
 
@@ -57,15 +59,16 @@ class MrsClaus implements Runnable {
     public void run() {
         boolean terminate = false;
         while (!terminate) {
+            int presentsToDeliver = 0;
             for (ToyMachine tm : toyMachines) {
                 Present p = tm.givePresent();
-                terminate = (p == null);
-                if (terminate) {
-                    break;
+                if (p == null) {
+                    continue;
                 }
                 availablePresents.add(p);
+                presentsToDeliver += 1;
             }
-            int presentsToDeliver = availablePresents.size();
+            terminate = presentsToDeliver < 1;
             while (presentsToDeliver > 0) {
                 try {
                     execute.execute(availableElves.takeFirst());
@@ -83,22 +86,36 @@ class MrsClaus implements Runnable {
 
     static class Builder {
 
-        private int numberOfTeamMembers = 0;
+        private int numberOfTeamMembers;
+
+        Builder() {
+            toyMachineSupplier = MrsClaus::defaultToyMachineSupplier;
+            families = new ArrayList<>();
+            maxPerMachine = new ArrayList<>();
+            numberOfTeamMembers = 1;
+        }
 
         Builder setNumberOfTeamMembers(int teamSize) {
             this.numberOfTeamMembers = Helpers.mustBePositive(teamSize);
+            for (int n = 0; n < numberOfTeamMembers; n += 1) {
+                maxPerMachine.add(0);
+            }
             return this;
         }
 
         Builder addFamilies(List<String> familyNames) {
-            Objects.requireNonNull(families);
+            Objects.requireNonNull(familyNames);
             families.addAll(Helpers.mustNotBeEmpty(familyNames));
             toyMachineSupplier = MrsClaus::familyToyMachineSupplier;
             return this;
         }
 
         Builder setMaxPresentsPerFamily(int maxPresents) {
-            maxPresentsPerFamily = Helpers.mustNotBeNegative(maxPresents);
+            int maxPresentsPerFamily = Helpers.mustNotBeNegative(maxPresents);
+            for (int n = 0; n < maxPresentsPerFamily; n += 1) {
+                int index = n % maxPerMachine.size();
+                maxPerMachine.set(index, maxPerMachine.get(index) + 1);
+            }
             return this;
         }
 
