@@ -15,9 +15,7 @@ class Present {
         this.family = family;
     }
 
-    String getFamily() {
-        return family;
-    }
+    String getFamily() { return family; }
 
     @Override
     public String toString() {
