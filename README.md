@@ -1,4 +1,4 @@
-# Christmas delivery
+# Christmas Delivery
 ## Origin
 This kata is largely inspired by the work of Joe Wright in 
 https://code.joejag.com/coding-dojo/christmas-delivery/

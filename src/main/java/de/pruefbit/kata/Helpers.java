@@ -1,6 +1,6 @@
 package de.pruefbit.kata;
 
-import java.util.List;
+//import java.util.List;
 
 class Helpers {
 
@@ -18,10 +18,10 @@ class Helpers {
         return n;
     }
 
-    static List<String> mustNotBeEmpty(List<String> stringList) {
-        if (stringList.isEmpty()) {
-            throw new IllegalArgumentException("list of strings must not be empty");
-        }
-        return stringList;
-    }
+//    static List<String> mustNotBeEmpty(List<String> stringList) {
+//        if (stringList.isEmpty()) {
+//            throw new IllegalArgumentException("list of strings must not be empty");
+//        }
+//        return stringList;
+//    }
 }
