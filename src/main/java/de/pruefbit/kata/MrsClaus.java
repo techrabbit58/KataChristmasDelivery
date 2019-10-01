@@ -8,8 +8,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 
 class MrsClaus implements Runnable {
-
     static private final SantasSleigh santasSleigh = new Sleigh();
+
     private final Executor execute;
     private final List<ToyMachine> toyMachines = new ArrayList<>();
     private final BlockingDeque<Elf> availableElves = new LinkedBlockingDeque<>();
@@ -42,7 +42,11 @@ class MrsClaus implements Runnable {
     @Override
     public void run() {
         for (ToyMachine tm : toyMachines) {
-            availablePresents.add(tm.givePresent());
+            Present p = tm.givePresent();
+            if (p == null) {
+                break;
+            }
+            availablePresents.add(p);
         }
         int presentsToDeliver = availablePresents.size();
         while (presentsToDeliver > 0) {

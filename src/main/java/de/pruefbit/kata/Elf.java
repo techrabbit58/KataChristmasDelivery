@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class Elf implements Runnable {
-
     static private final int MILLIS_TO_WALK = 50;
 
     private final Consumer<Present> dropper;
