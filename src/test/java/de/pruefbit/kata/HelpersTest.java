@@ -26,4 +26,12 @@ class HelpersTest {
         List<String> stringList = new ArrayList<>();
         assertThrows(IllegalArgumentException.class, () -> mustNotBeEmpty(stringList));
     }
+
+    @Test
+    void mustNotBeEmpty_does_not_throw_if_nonempty() {
+        List<String> stringList = new ArrayList<>();
+        stringList.add("foo");
+        assertDoesNotThrow(() -> mustNotBeEmpty(stringList));
+        assertEquals(1, stringList.size());
+    }
 }
