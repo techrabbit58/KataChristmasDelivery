@@ -33,8 +33,7 @@ class MrsClaus implements Runnable {
         try {
             return availablePresents.takeFirst();
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            throw new RuntimeException("an elf could not load a present");
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -53,8 +52,7 @@ class MrsClaus implements Runnable {
             try {
                 execute.execute(availableElves.takeFirst());
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                throw new RuntimeException("mrs claus got interrupted");
+                throw new RuntimeException(e.getMessage());
             }
             presentsToDeliver -= 1;
         }
