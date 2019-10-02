@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MrsClausTest {
 
-    private static final int TEAM_SIZE = 7;
+    private static final int TEAM_SIZE = 3;
     private static final int MULTIPLE_RUNS = 3;
 //    private static final int MAX_PRESENTS_PER_FAMILY = 10;
 //    private static final List<String> FAMILIES = Arrays.asList(
@@ -43,5 +43,17 @@ class MrsClausTest {
                 mrsClaus.run();
             }
         });
+    }
+
+    @Test
+    void can_create_mrs_claus_by_builder() {
+        mrsClaus = new MrsClaus.Builder().build();
+        assertDoesNotThrow(() -> mrsClaus.run());
+    }
+
+    @Test
+    void builder_created_mrs_claus_runs_with_a_team() {
+        mrsClaus = new MrsClaus.Builder().setTeamSize(TEAM_SIZE).build();
+        assertDoesNotThrow(() -> mrsClaus.run());
     }
 }
