@@ -13,7 +13,7 @@ class ToyMachineTest {
     @Test
     void can_instantiate_with_num_presents_per_family() {
         assertNotNull(new ToyMachine.Builder()
-                .setMaxPresentsPerFamily(MAX_PRESENTS_PER_FAMILY)
+                .setMaxPresentsPerFamily("Miller", MAX_PRESENTS_PER_FAMILY)
                 .build());
     }
 
@@ -25,7 +25,7 @@ class ToyMachineTest {
     }
 
     @Test
-    void new_machines_may_work_for_unspecified_family() {
+    void new_machines_works_for_unspecified_family() {
         ToyMachine toyMachine = new ToyMachine();
         Present present = toyMachine.givePresent();
         assertNotNull(present.getFamily());
@@ -35,7 +35,7 @@ class ToyMachineTest {
     void new_machines_can_work_for_the_millers() {
         ToyMachine toyMachine = new ToyMachine.Builder()
                 .addFamily("Miller")
-                .setMaxPresentsPerFamily(1)
+                .setMaxPresentsPerFamily("Miller", 1)
                 .build();
         Present present = toyMachine.givePresent();
         assertEquals("Miller", present.getFamily());
@@ -46,9 +46,8 @@ class ToyMachineTest {
         List<String> families = Arrays.asList("Kowalski", "O'Hara", "McFly");
         ToyMachine.Builder tmBuilder = new ToyMachine.Builder();
         families.forEach(tmBuilder::addFamily);
-        ToyMachine toyMachine = tmBuilder
-                .setMaxPresentsPerFamily(1)
-                .build();
+        families.forEach(f -> tmBuilder.setMaxPresentsPerFamily(f, 1));
+        ToyMachine toyMachine = tmBuilder.build();
         for (int n = 0; n < families.size(); n += 1) {
             Present present = toyMachine.givePresent();
             assertTrue(families.contains(present.getFamily()));
@@ -56,28 +55,21 @@ class ToyMachineTest {
     }
 
     @Test
-    void toy_machines_with_families_need_positive_max_presents() {
-        assertThrows(RuntimeException.class, () -> new ToyMachine.Builder().addFamily("Miller").build());
-    }
-
-    @Test
     void toy_machine_build_without_families_is_ok() {
         assertDoesNotThrow(() -> {
             new ToyMachine.Builder().build();
-            new ToyMachine.Builder().setMaxPresentsPerFamily(0).build();
-            new ToyMachine.Builder().setMaxPresentsPerFamily(MAX_PRESENTS_PER_FAMILY).build();
         });
     }
 
     @Test
     void negative_not_allowed_for_max_presents() {
-        assertThrows(RuntimeException.class, () -> new ToyMachine.Builder().setMaxPresentsPerFamily(-1));
+        assertThrows(RuntimeException.class, () -> new ToyMachine.Builder().setMaxPresentsPerFamily("Miller", -1));
     }
 
     @Test
     void provides_null_with_family_and_presents_limit_exceeded() {
         String family = "Miller";
-        ToyMachine tm = new ToyMachine.Builder().addFamily(family).setMaxPresentsPerFamily(1).build();
+        ToyMachine tm = new ToyMachine.Builder().addFamily(family).setMaxPresentsPerFamily("Miller", 1).build();
         Present p1 = tm.givePresent();
         assertEquals(family, p1.getFamily());
         Present p2 = tm.givePresent();

@@ -52,8 +52,16 @@ class MrsClausTest {
     }
 
     @Test
-    void builder_created_mrs_claus_runs_with_a_team() {
+    void builder_based_mrs_claus_runs_with_a_team() {
         mrsClaus = new MrsClaus.Builder().setTeamSize(TEAM_SIZE).build();
+        assertDoesNotThrow(() -> mrsClaus.run());
+    }
+
+    @Test
+    void builder_based_mrs_claus_runs_with_the_millers() {
+        mrsClaus = new MrsClaus.Builder()
+                .addFamily("Miller")
+                .build();
         assertDoesNotThrow(() -> mrsClaus.run());
     }
 }

@@ -1,8 +1,10 @@
 package de.pruefbit.kata;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.*;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import static de.pruefbit.kata.Helpers.mustBePositive;
 
@@ -15,11 +17,33 @@ class MrsClaus implements Runnable {
     private final BlockingDeque<Present> availablePresents = new LinkedBlockingDeque<>();
 
     MrsClaus(int teamSize) {
+        final Set<String> families = new HashSet<>();
+        families.add("Default");
+        final int maxPresentsPerFamily = 1;
+        deployToyMachines(teamSize, families, maxPresentsPerFamily);
+        employElves(teamSize);
+        exec = Executors.newFixedThreadPool(teamSize);
+    }
+
+    private MrsClaus(OpMode opMode) {
+        deployToyMachines(opMode.teamSize, opMode.families, 1);
+        employElves(opMode.teamSize);
+        exec = Executors.newFixedThreadPool(opMode.teamSize);
+    }
+
+    private void deployToyMachines(int teamSize, Set<String> families, int maxPresentsPerFamily) {
         for (int n = 0; n < mustBePositive(teamSize); n += 1) {
-            toyMachines.add(new ToyMachine());
+            ToyMachine.Builder tmBuilder = new ToyMachine.Builder();
+            families.forEach(tmBuilder::addFamily);
+            families.forEach(f -> tmBuilder.setMaxPresentsPerFamily(f, maxPresentsPerFamily));
+            toyMachines.add(tmBuilder.build());
+        }
+    }
+
+    private void employElves(int teamSize) {
+        for (int n = 0; n < mustBePositive(teamSize); n += 1) {
             availableElves.add(new Elf(this::givePresent, santasSleigh::pack, this::callback));
         }
-        exec = Executors.newFixedThreadPool(teamSize);
     }
 
     private void callback(Elf elf) {
@@ -55,16 +79,32 @@ class MrsClaus implements Runnable {
         }
     }
 
+    private static class OpMode {
+        private final Set<String> families = new HashSet<>();
+        private int teamSize;
+    }
+
     static class Builder {
-        private int teamSize = 1;
+        private final OpMode opMode;
+
+        Builder() {
+            this.opMode = new OpMode();
+            opMode.teamSize = 1;
+        }
 
         Builder setTeamSize(int n) {
-            this.teamSize = mustBePositive(n);
+            opMode.teamSize = mustBePositive(n);
+            return this;
+        }
+
+        Builder addFamily(String name) {
+            opMode.families.add(name);
             return this;
         }
 
         MrsClaus build() {
-            return new MrsClaus(teamSize);
+            return new MrsClaus(opMode);
         }
+
     }
 }
