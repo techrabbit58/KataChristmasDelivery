@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class Elf implements Runnable {
-    static private final int MILLIS_TO_WALK = 50;
+    static private final int WALK_TIME = 50; // in millis
 
     private final Consumer<Present> dropper;
     private final Supplier<Present> loader;
@@ -19,18 +19,16 @@ class Elf implements Runnable {
 
     @Override
     public void run() {
-        Present present = Objects.requireNonNull(loader.get(), "elf did not get a present");
-        System.out.println(this + " carries " + present);
+        Present present = Objects.requireNonNull(loader.get());
         walk();
         dropper.accept(present);
         walk();
         callback.accept(this);
-        System.out.println(this + " is now idle");
     }
 
     private void walk() {
         try {
-            Thread.sleep(MILLIS_TO_WALK);
+            Thread.sleep(WALK_TIME);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
