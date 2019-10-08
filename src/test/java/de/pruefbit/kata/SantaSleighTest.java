@@ -12,6 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class SantaSleighTest {
 
     @Test
+    void can_instantiate_sleigh_without_logging() {
+        SantasSleigh theSleigh = new Sleigh();
+        theSleigh.pack(new Present("Miller"));
+        assertNotNull(theSleigh);
+    }
+
+    @Test
     void can_put_new_presents_to_santas_sleigh() {
         BlockingQueue<String> cargoList = new LinkedBlockingQueue<>();
         SantasSleigh theSleigh = new Sleigh(cargoList);

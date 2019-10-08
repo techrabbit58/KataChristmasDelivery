@@ -7,12 +7,22 @@ import java.util.Queue;
 class Sleigh implements SantasSleigh {
     private final Queue<String> cargoList;
 
+    Sleigh() {
+        this.cargoList = null;
+    }
+
     Sleigh(Queue<String> cargoList) {
         this.cargoList = cargoList;
     }
 
     @Override
     public void pack(Present present) {
-        cargoList.add(ZonedDateTime.now().toString() + " got " + Objects.requireNonNull(present).toString());
+        if (cargoList != null) {
+            cargoList.add(
+                    ZonedDateTime.now().toString()
+                            + " got "
+                            + Objects.requireNonNull(present).toString()
+            );
+        }
     }
 }
