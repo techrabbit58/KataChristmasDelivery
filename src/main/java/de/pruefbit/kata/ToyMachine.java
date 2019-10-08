@@ -1,7 +1,6 @@
 package de.pruefbit.kata;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -20,10 +19,10 @@ import static java.util.stream.Collectors.toList;
  * @see ProductionPlan
  */
 class ToyMachine {
-    static final int DEFAULT_PRODUCTION_LIMIT = 1;
+    static final int DEFAULT_PRODUCTION_LIMIT = 3;
 
     private int genericProductionLimit;
-    private Map<String, Integer> families;
+    private final Map<String, Integer> families;
 
     ToyMachine() {
         genericProductionLimit = DEFAULT_PRODUCTION_LIMIT;

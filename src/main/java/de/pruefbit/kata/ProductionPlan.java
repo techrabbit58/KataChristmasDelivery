@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import static de.pruefbit.kata.Helpers.*;
-import static java.util.stream.Collectors.toList;
 
 class ProductionPlan {
     private Map<String, Integer> families;

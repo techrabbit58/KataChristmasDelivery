@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ElfTest {
     private final String FAMILY = "Miller";
-    private final String SENTINEL = "SENTINEL";
     private final Present PRESENT = new Present(FAMILY);
     private Present dropResult;
     private Elf callbackResult;
@@ -31,6 +30,7 @@ class ElfTest {
     @Test
     void elf_returns_immediately_if_receiving_empty_present() {
         Elf elf = new Elf(this::nullLoader, this::dropper, this::callback);
+        String SENTINEL = "SENTINEL";
         dropResult = new Present(SENTINEL);
         callbackResult = null;
         Present sentinel = dropResult;
