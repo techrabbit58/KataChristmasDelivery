@@ -20,14 +20,23 @@ class ProductionPlan {
     }
 
     List<String> getFamilies() {
-        return new ArrayList<>(families.keySet());
+        if (families != null) {
+            return new ArrayList<>(families.keySet());
+        }
+        return null;
     }
 
     int getProductionLimit(String family) {
-        return families.getOrDefault(mustNotBeEmpty(family), 0);
+        if (families != null) {
+            return families.getOrDefault(mustNotBeEmpty(family), 0);
+        }
+        return 0;
     }
 
     void setProductionLimit(String family, int limit) {
+        if (families == null) {
+            families = new HashMap<>();
+        }
         families.put(mustNotBeEmpty(family), mustBePositive(limit));
     }
 

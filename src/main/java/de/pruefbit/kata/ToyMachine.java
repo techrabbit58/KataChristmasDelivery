@@ -1,5 +1,10 @@
 package de.pruefbit.kata;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+
 /**
  * ToyMachines give back presents on demand, as long as there are presents
  * to be produced, according to the machine setup.
@@ -15,7 +20,59 @@ package de.pruefbit.kata;
  * @see ProductionPlan
  */
 class ToyMachine {
+    static final int DEFAULT_PRODUCTION_LIMIT = 1;
+
+    private int genericProductionLimit;
+    private Map<String, Integer> families;
+
+    ToyMachine() {
+        genericProductionLimit = DEFAULT_PRODUCTION_LIMIT;
+        families = null;
+    }
+
+    ToyMachine(ProductionPlan productionPlan) {
+        genericProductionLimit = productionPlan.getProductionLimit();
+        List<String> ppf = productionPlan.getFamilies();
+        if (ppf != null) {
+            families = new HashMap<>();
+            ppf.forEach(f -> families.put(f, productionPlan.getProductionLimit(f)));
+        }
+        else {
+            families = null;
+        }
+    }
+
     Present givePresent() {
-        return new Present();
+        if (families != null) {
+            return giveFamilyPresent();
+        }
+        else {
+            return giveGenericPresent();
+        }
+    }
+
+    private Present giveFamilyPresent() {
+        List<String> eligibleFamilies = families.keySet().stream()
+                .filter(f -> (families.get(f) > 0))
+                .collect(toList());
+        if (!eligibleFamilies.isEmpty()) {
+            Collections.shuffle(eligibleFamilies);
+            String ef = eligibleFamilies.get(0);
+            families.compute(ef, (k, v) -> (v == null) ? 0 : v - 1);
+            return new Present(ef);
+        }
+        return null;
+    }
+
+    private Present giveGenericPresent() {
+        Present present;
+        if (genericProductionLimit > 0) {
+            present = new Present();
+            genericProductionLimit -= 1;
+        }
+        else {
+            present = null;
+        }
+        return present;
     }
 }

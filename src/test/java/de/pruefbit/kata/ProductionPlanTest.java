@@ -23,6 +23,11 @@ class ProductionPlanTest {
     }
 
     @Test
+    void plan_without_families_returns_null_for_family_list() {
+        assertNull(productionPlan.getFamilies());
+    }
+
+    @Test
     void accepts_a_family_to_be_added_to_its_family_list() {
         productionPlan.addFamily(FAMILY);
         assertEquals(Collections.singletonList(FAMILY), productionPlan.getFamilies());
@@ -37,6 +42,11 @@ class ProductionPlanTest {
     @Test
     void returns_zero_on_unknown_family() {
         productionPlan.addFamily(FAMILY);
+        assertEquals(0, productionPlan.getProductionLimit(UNKNOWN_FAMILY));
+    }
+
+    @Test
+    void returns_zero_on_unknown_if_no_families() {
         assertEquals(0, productionPlan.getProductionLimit(UNKNOWN_FAMILY));
     }
 
