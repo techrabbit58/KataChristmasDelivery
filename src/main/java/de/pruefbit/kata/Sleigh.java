@@ -18,11 +18,7 @@ class Sleigh implements SantasSleigh {
     @Override
     public void pack(Present present) {
         if (cargoList != null) {
-            cargoList.add(
-                    ZonedDateTime.now().toString()
-                            + " got "
-                            + Objects.requireNonNull(present).toString()
-            );
+            cargoList.add(ZonedDateTime.now().toString() + " got " + Objects.requireNonNull(present).toString());
         }
     }
 }
