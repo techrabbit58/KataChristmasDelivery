@@ -7,14 +7,20 @@ package de.pruefbit.kata;
 class Present {
     private final String family;
 
+    Present() {
+        family = null;
+    }
+
     Present(String family) {
         this.family = family;
     }
 
-    String getFamily() { return family; }
+    String getFamily() {
+        return family;
+    }
 
     @Override
     public String toString() {
-        return  this.getClass().getSimpleName() + "@" + this.hashCode() + " for " + getFamily();
+        return this.getClass().getSimpleName() + "@" + this.hashCode() + " for family " + getFamily();
     }
 }

@@ -3,6 +3,7 @@ package de.pruefbit.kata;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static de.pruefbit.kata.Helpers.*;
@@ -17,8 +18,22 @@ class HelpersTest {
     }
 
     @Test
-    void mayNotBeNegative_throws_on_negative() {
+    void mustBePositive_returns_argument_if_positive() {
+        final int POSITIVE = 42;
+        assertEquals(POSITIVE, mustBePositive(POSITIVE));
+    }
+
+    @Test
+    void mustNotBeNegative_throws_on_negative() {
         assertThrows(IllegalArgumentException.class, () -> mustNotBeNegative(-1));
+    }
+
+    @Test
+    void mustNotBeNegative_returns_argument_if_not_negative() {
+        final int ZERO = 0;
+        final int POSITIVE = 42;
+        assertEquals(ZERO, mustNotBeNegative(ZERO));
+        assertEquals(POSITIVE, mustNotBeNegative(POSITIVE));
     }
 
     @Test
@@ -33,5 +48,11 @@ class HelpersTest {
         stringList.add("foo");
         assertDoesNotThrow(() -> mustNotBeEmpty(stringList));
         assertEquals(1, stringList.size());
+    }
+
+    @Test
+    void mustNotBeEmpty_returns_argument_if_nonempty() {
+        List<String> stringList = Arrays.asList("foo", "bar", "baz");
+        assertEquals(stringList, mustNotBeEmpty(stringList));
     }
 }
