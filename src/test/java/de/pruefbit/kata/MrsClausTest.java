@@ -1,5 +1,7 @@
 package de.pruefbit.kata;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,4 +19,10 @@ class MrsClausTest {
             "O'Hara",
             "Kojak"
     );
+
+    @Test
+    void can_be_instantiated_with_defaults() {
+        MrsClaus mrsClaus = new MrsClaus();
+        assertNotNull(mrsClaus);
+    }
 }
