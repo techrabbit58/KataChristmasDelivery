@@ -43,7 +43,7 @@ class HelpersTest {
     }
 
     @Test
-    void mustNotBeEmpty_does_not_throw_if_nonempty() {
+    void mustNotBeEmpty_does_not_throw_if_nonempty_list() {
         List<String> stringList = new ArrayList<>();
         stringList.add("foo");
         assertDoesNotThrow(() -> mustNotBeEmpty(stringList));
@@ -51,8 +51,26 @@ class HelpersTest {
     }
 
     @Test
-    void mustNotBeEmpty_returns_argument_if_nonempty() {
+    void mustNotBeEmpty_returns_argument_if_nonempty_list() {
         List<String> stringList = Arrays.asList("foo", "bar", "baz");
         assertEquals(stringList, mustNotBeEmpty(stringList));
+    }
+
+    @Test
+    void mustNotBeEmpty_throws_on_empty_string() {
+        String s = "";
+        assertThrows(IllegalArgumentException.class, () -> mustNotBeEmpty(s));
+    }
+
+    @Test
+    void mustNotBeEmpty_does_not_throw_if_nonempty_string() {
+        String s = "foo";
+        assertDoesNotThrow(() -> mustNotBeEmpty(s));
+    }
+
+    @Test
+    void mustNotBeEmpty_returns_argument_if_nonempty_string() {
+        String s = "foo";
+        assertEquals(s, mustNotBeEmpty(s));
     }
 }

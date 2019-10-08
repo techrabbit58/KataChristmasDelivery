@@ -18,6 +18,13 @@ class Helpers {
         return n;
     }
 
+    static String mustNotBeEmpty(String s) {
+        if (s.isEmpty()) {
+            throw new IllegalArgumentException("string must not be empty");
+        }
+        return s;
+    }
+
     static List<String> mustNotBeEmpty(List<String> stringList) {
         if (stringList.isEmpty()) {
             throw new IllegalArgumentException("list of strings must not be empty");
