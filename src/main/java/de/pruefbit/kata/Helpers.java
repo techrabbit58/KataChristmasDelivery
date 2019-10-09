@@ -4,6 +4,10 @@ import java.util.List;
 
 class Helpers {
 
+    private Helpers() {
+        throw new AssertionError("utility class shall never be instantiated nor subclassed");
+    }
+
     static int mustBePositive(int n) {
         if (n <= 0) {
             throw new IllegalArgumentException("number must be positive");

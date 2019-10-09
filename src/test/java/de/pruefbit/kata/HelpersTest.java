@@ -2,6 +2,8 @@ package de.pruefbit.kata;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +12,17 @@ import static de.pruefbit.kata.Helpers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HelpersTest {
+
+    @Test
+    void has_private_default_constructor() {
+        assertThrows(InvocationTargetException.class, () -> {
+            Constructor<Helpers> helpers = Helpers.class.getDeclaredConstructor();
+            boolean access = helpers.isAccessible();
+            helpers.setAccessible(true);
+            helpers.newInstance();
+            helpers.setAccessible(access);
+        });
+    }
 
     @Test
     void mustBePositive_throws_on_zero_or_negative() {
