@@ -2,6 +2,7 @@ package de.pruefbit.kata;
 
 import java.util.*;
 
+import static de.pruefbit.kata.WorkPlan.DEFAULT_PRODUCTION_LIMIT;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -19,8 +20,6 @@ import static java.util.stream.Collectors.toList;
  * @see ProductionPlan
  */
 class ToyMachine {
-    static final int DEFAULT_PRODUCTION_LIMIT = 3;
-
     private int genericProductionLimit;
     private final Map<String, Integer> families;
 

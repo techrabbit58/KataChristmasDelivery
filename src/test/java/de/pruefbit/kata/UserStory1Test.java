@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static de.pruefbit.kata.WorkPlan.DEFAULT_PRODUCTION_LIMIT;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserStory1Test {
@@ -28,7 +29,7 @@ class UserStory1Test {
         ToyMachine tm = new ToyMachine();
         Elf elf = new Elf(tm::givePresent, theSleigh::pack, this::callback);
         elf.run();
-        assertEquals(ToyMachine.DEFAULT_PRODUCTION_LIMIT, cargoList.size());
+        assertEquals(DEFAULT_PRODUCTION_LIMIT, cargoList.size());
     }
 
     @Test

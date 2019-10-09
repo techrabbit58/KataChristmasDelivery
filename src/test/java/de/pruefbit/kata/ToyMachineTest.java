@@ -14,7 +14,7 @@ class ToyMachineTest {
     @Test
     void works_with_defaults_if_plan_not_given() {
         ToyMachine tm = new ToyMachine();
-        assertEquals(ToyMachine.DEFAULT_PRODUCTION_LIMIT, getProductionResult(tm));
+        assertEquals(WorkPlan.DEFAULT_PRODUCTION_LIMIT, getProductionResult(tm));
     }
 
     @Test
