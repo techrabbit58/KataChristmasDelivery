@@ -1,6 +1,7 @@
 package de.pruefbit.kata;
 
 import org.junit.jupiter.api.Test;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +23,7 @@ class MrsClausTest {
     @Test
     void can_be_instantiated_with_defaults() {
         MrsClaus mrsClaus = new MrsClaus();
+        mrsClaus.run();
         assertNotNull(mrsClaus);
     }
 
@@ -31,6 +33,20 @@ class MrsClausTest {
         wp.setProductionLimit(PRODUCTION_LIMIT);
         wp.setTeamSize(TEAM_SIZE);
         MrsClaus mrsClaus = new MrsClaus(wp);
+        mrsClaus.run();
         assertNotNull(mrsClaus);
+    }
+
+    @Test
+    void can_be_instantiated_with_family_work_plan() {
+        assertThrows(NotImplementedException.class, () -> {
+            WorkPlan wp = new WorkPlan();
+            wp.setFamilies(FAMILIES);
+            wp.setProductionLimit(PRODUCTION_LIMIT);
+            wp.setTeamSize(TEAM_SIZE);
+            MrsClaus mrsClaus = new MrsClaus(wp);
+            mrsClaus.run();
+            assertNotNull(mrsClaus);
+        });
     }
 }

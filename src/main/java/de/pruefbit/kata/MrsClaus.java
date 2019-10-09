@@ -32,7 +32,7 @@ class MrsClaus implements Runnable {
     MrsClaus(WorkPlan workPlan) {
         this.teamSize = workPlan.getTeamSize();
         this.productionLimit = workPlan.getProductionLimit();
-        this.families = null;
+        this.families = workPlan.getFamilies();
     }
 
     @Override
