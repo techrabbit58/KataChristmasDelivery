@@ -36,7 +36,7 @@ class ProductionPlan {
         if (families == null) {
             families = new HashMap<>();
         }
-        families.put(mustNotBeEmpty(family), mustBePositive(limit));
+        families.put(mustNotBeEmpty(family), mustNotBeNegative(limit));
     }
 
     void addAllFamilies(List<String> names) {

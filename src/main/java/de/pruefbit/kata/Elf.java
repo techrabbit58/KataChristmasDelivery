@@ -12,7 +12,7 @@ import java.util.function.Supplier;
  * An elf fed with a "null" present will never call back.
  */
 class Elf implements Runnable {
-    static private final int WALK_TIME = 50; // in millis
+    static private final int WALK_TIME = 10; // in millis
 
     private final Consumer<Present> dropper;
     private final Supplier<Present> loader;
@@ -38,8 +38,7 @@ class Elf implements Runnable {
     private void walk() {
         try {
             Thread.sleep(WALK_TIME);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        } catch (InterruptedException ignored) {
         }
     }
 
