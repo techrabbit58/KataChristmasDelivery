@@ -20,6 +20,6 @@ class PresentTest {
     void can_identify_itself_by_a_friendly_string() {
         String family = "Miller";
         String s = new Present(family).toString();
-        assertTrue(s.startsWith("Present@") && s.endsWith(family));
+        assertTrue(s.startsWith("Present") && s.contains(family));
     }
 }

@@ -21,6 +21,6 @@ class Present {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "@" + this.hashCode() + " for family " + getFamily();
+        return "Present{id=" + hashCode() + ", family='" + family + '\'' + '}';
     }
 }
