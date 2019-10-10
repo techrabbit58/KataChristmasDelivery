@@ -25,7 +25,7 @@ class SantaSleighTest {
         List<String> families = Arrays.asList("Miller", "Kojak", "McFly");
         for (String family : families) {
             theSleigh.pack(new Present(family));
-            assertTrue(cargoList.toArray()[cargoList.size() - 1].toString().endsWith(family));
+            assertTrue(cargoList.toArray()[cargoList.size() - 1].toString().contains(family));
         }
         assertEquals(families.size(), cargoList.size());
     }
