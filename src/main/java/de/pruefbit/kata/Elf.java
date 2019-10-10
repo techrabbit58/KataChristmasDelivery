@@ -39,6 +39,7 @@ class Elf implements Runnable {
         try {
             Thread.sleep(WALK_TIME);
         } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
         }
     }
 

@@ -101,6 +101,7 @@ class MrsClaus implements Runnable {
         try {
             threads.awaitTermination(3000, TimeUnit.MILLISECONDS);
         } catch (InterruptedException ignored) {
+            Thread.currentThread().interrupt();
         }
     }
 
