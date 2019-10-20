@@ -57,7 +57,7 @@ class ToyMachine {
             Collections.shuffle(eligibleFamilies);
             String ef = eligibleFamilies.get(0);
             families.compute(ef, (k, v) -> (v == null || v == 0) ? 0 : v - 1);
-            return new Present(ef);
+            return new Present(ef, toString());
         }
         return null;
     }
@@ -72,5 +72,10 @@ class ToyMachine {
             present = null;
         }
         return present;
+    }
+
+    @Override
+    public String toString() {
+        return "ToyMachine{id=" + hashCode() + '}';
     }
 }

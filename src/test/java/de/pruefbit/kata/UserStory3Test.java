@@ -33,5 +33,6 @@ class UserStory3Test {
         for (String item: mrsClaus.getCargoList()) {
             System.out.println(item);
         }
+        assertEquals(PRODUCTION_LIMIT * FAMILIES.size(), mrsClaus.getCargoList().size());
     }
 }

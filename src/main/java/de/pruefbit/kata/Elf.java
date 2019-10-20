@@ -28,6 +28,7 @@ class Elf implements Runnable {
     public void run() {
         Present present = loader.get();
         if (present != null) {
+            present.setTransporter(toString());
             walk();
             dropper.accept(present);
             walk();
@@ -45,6 +46,6 @@ class Elf implements Runnable {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "@" + this.hashCode();
+        return "Elf{id=" + hashCode() + '}';
     }
 }
