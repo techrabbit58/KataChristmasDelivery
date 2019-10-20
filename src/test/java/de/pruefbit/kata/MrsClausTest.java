@@ -46,4 +46,17 @@ class MrsClausTest {
         mrsClaus.run();
         assertEquals(FAMILIES.size() * PRODUCTION_LIMIT, mrsClaus.getCargoList().size());
     }
+
+    @Test
+    void presents_for_naughty_families_can_be_cancelled() {
+        WorkPlan wp = new WorkPlan();
+        wp.setFamilies(FAMILIES);
+        wp.setProductionLimit(PRODUCTION_LIMIT);
+        wp.setTeamSize(TEAM_SIZE);
+        MrsClaus mrsClaus = new MrsClaus(wp);
+        mrsClaus.dropForNaughtyFamily("Kowalsky");
+        mrsClaus.dropForNaughtyFamily("Kojak");
+        mrsClaus.run();
+        assertEquals((FAMILIES.size() - 2) * PRODUCTION_LIMIT, mrsClaus.getCargoList().size());
+    }
 }

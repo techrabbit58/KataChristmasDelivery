@@ -20,6 +20,7 @@ class MrsClaus implements Runnable {
     private List<String> families;
     private String currentFamily;
     private ExecutorService threads;
+    private Set<String> naughtyFamilies = new HashSet<>();
 
     MrsClaus() {
         this.teamSize = DEFAULT_TEAM_SIZE;
@@ -88,7 +89,9 @@ class MrsClaus implements Runnable {
             for (ToyMachine toyMachine : toyMachines) {
                 Present present = toyMachine.givePresent();
                 if (present != null) {
-                    queues.get(present.getFamily()).addLast(present);
+                    if (!naughtyFamilies.contains(present.getFamily())) {
+                        queues.get(present.getFamily()).addLast(present);
+                    }
                     break;
                 }
             }
@@ -114,5 +117,9 @@ class MrsClaus implements Runnable {
 
     List<String> getCargoList() {
         return new ArrayList<>(cargoList);
+    }
+
+    void dropForNaughtyFamily(String family) {
+        naughtyFamilies.add(family);
     }
 }
