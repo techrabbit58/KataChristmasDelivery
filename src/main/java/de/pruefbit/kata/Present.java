@@ -21,6 +21,6 @@ class Present {
 
     @Override
     public String toString() {
-        return "Present{id=" + hashCode() + ", family='" + family + '\'' + '}';
+        return "Present{id=" + hashCode() + ", family='" + family + "\'}";
     }
 }

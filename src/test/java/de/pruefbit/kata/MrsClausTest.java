@@ -9,7 +9,6 @@ import static de.pruefbit.kata.WorkPlan.DEFAULT_PRODUCTION_LIMIT;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MrsClausTest {
-
     private static final int TEAM_SIZE = 3;
     private static final int PRODUCTION_LIMIT = 5;
     private static final List<String> FAMILIES = Arrays.asList(
