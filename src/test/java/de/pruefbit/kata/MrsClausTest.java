@@ -54,8 +54,8 @@ class MrsClausTest {
         wp.setProductionLimit(PRODUCTION_LIMIT);
         wp.setTeamSize(TEAM_SIZE);
         MrsClaus mrsClaus = new MrsClaus(wp);
-        mrsClaus.dropForNaughtyFamily("Kowalsky");
-        mrsClaus.dropForNaughtyFamily("Kojak");
+        mrsClaus.dropPresentsForNaughtyFamily("Kowalsky");
+        mrsClaus.dropPresentsForNaughtyFamily("Kojak");
         mrsClaus.run();
         assertEquals((FAMILIES.size() - 2) * PRODUCTION_LIMIT, mrsClaus.getCargoList().size());
     }

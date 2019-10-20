@@ -20,7 +20,7 @@ class MrsClaus implements Runnable {
     private List<String> families;
     private String currentFamily;
     private ExecutorService threads;
-    private Set<String> naughtyFamilies = new HashSet<>();
+    private final Set<String> naughtyFamilies = new HashSet<>();
 
     MrsClaus() {
         this.teamSize = DEFAULT_TEAM_SIZE;
@@ -119,7 +119,7 @@ class MrsClaus implements Runnable {
         return new ArrayList<>(cargoList);
     }
 
-    void dropForNaughtyFamily(String family) {
+    void dropPresentsForNaughtyFamily(String family) {
         naughtyFamilies.add(family);
     }
 }
