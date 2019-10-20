@@ -48,7 +48,7 @@ class MrsClausTest {
     }
 
     @Test
-    void presents_for_naughty_families_can_be_cancelled() {
+    void mrsClaus_drops_packets_for_naughty_families() {
         WorkPlan wp = new WorkPlan();
         wp.setFamilies(FAMILIES);
         wp.setProductionLimit(PRODUCTION_LIMIT);
