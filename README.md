@@ -1,7 +1,11 @@
 # Christmas Delivery
 ## Origin
-This kata is largely inspired by the work of Joe Wright in 
-https://code.joejag.com/coding-dojo/christmas-delivery/
+This kata is largely inspired by [the work of Joe Wright][link1].
+I captured the README text from [CodingDojo][link2],
+and only repaired some minor formatting issue.
+
+[link1]: https://code.joejag.com/coding-dojo/christmas-delivery/
+[link2]: http://codingdojo.org/kata/BankOCR/
 
 ## Kata
 Due to huge population growth in the world, Santa Claus 
