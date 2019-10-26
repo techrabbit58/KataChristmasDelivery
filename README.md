@@ -2,7 +2,7 @@
 ## Origin
 This kata is largely inspired by [the work of Joe Wright][link1].
 I captured the README text from [CodingDojo][link2],
-and only repaired some minor formatting issue.
+and only repaired some minor formatting issues.
 
 [link1]: https://code.joejag.com/coding-dojo/christmas-delivery/
 [link2]: http://codingdojo.org/kata/BankOCR/
